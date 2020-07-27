@@ -62,8 +62,8 @@ var numbers = [1, 2, 3, 4, 5]; //different variable types to show example
 
 z = z + "2"; // adds string with value '2' to x
 z = z - "2"; // subtracts string with value '2' from x
-z = ++z; //increments x by 1
-z = --z; //decrements x by 1
+z++;; //increments x by 1
+z--;; //decrements x by 1
 z = ~z; // bitwise not, assigns x value of -(x-1). In this case, -101
 typeValue = typeof doll; //assigns 'typeValue' the data type of 'doll'
 delete hair[3]; //deletes a specific object or array index
