@@ -177,15 +177,9 @@ _.contains = function(array, value){
 */
 
 _.each = function(collection, testFunc){
-    // if(Array.isArray(collection)){
-    //     for(var i = 0; i < collection.length; i++){
-    //         testFunc(collection[i]);
-    //     }
-    // }else{
         for(var key in collection){
             testFunc(collection[key], key, collection);
         }
-   // }
 };
 
 /** _.unique
@@ -328,9 +322,7 @@ _.map = function(collection, testFunc){
 
 _.pluck = function(objectArray, property){
     var result = [];
-    // for(var y = 0; y < objectArray.length; y++){
     result = (_.map(objectArray, function(value, key, collection){return collection[key][property]}));
-    //}
     return result;
 };
 
@@ -356,6 +348,21 @@ _.pluck = function(objectArray, property){
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function(collection, testFunc2){
+    var passed = true;
+    function funcBundle(element, index, collection){
+        if(typeof testFunc2 == 'function'){
+            if(!testFunc2(element, index, collection)){
+            passed = false;
+            }
+        }else if(!element){
+            passed = false;
+        }
+    }
+    _.each(collection, funcBundle);
+    return passed;
+};
+
 
 /** _.some
 * Arguments:
@@ -378,6 +385,21 @@ _.pluck = function(objectArray, property){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, someTestFunc){
+    var passed = false;
+    function funcBundle(element, index, collection){
+        if(typeof someTestFunc == 'function'){
+            if(someTestFunc(element, index, collection)){
+            passed = true;
+            }
+        }else if(element){
+            passed = true;
+        }
+    }
+    _.each(collection, funcBundle);
+    return passed;
+};
+
 
 /** _.reduce
 * Arguments:
@@ -398,6 +420,28 @@ _.pluck = function(objectArray, property){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function(array, testFunc, seed){
+    
+    // function funcBundle(previousResult, element, index){
+    //     if(seed == undefined) seed = array[0];
+    //     if(index == 0) previousResult = seed;
+    //     previousResult = testFunc(previousResult, element, index);
+        
+    // }
+    // return _.each(array, funcBundle);
+    
+    var i = 0;
+    if (typeof seed === 'undefined') {
+        seed = array[0];
+        i = 1;
+    }
+    var previousResult = seed;
+    for (; i < array.length; i++) {
+        previousResult = testFunc(previousResult, array[i], i);
+    }
+    return previousResult;
+};
+
 
 /** _.extend
 * Arguments:
@@ -413,6 +457,15 @@ _.pluck = function(objectArray, property){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function(){
+    for(var i in arguments){
+        for(var key in arguments[i]){
+            arguments[0][key] = arguments[i][key];
+        }
+    }
+    return arguments[0];
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
