@@ -1,5 +1,5 @@
 body {
-    background: rgb(166, 255, 234);
+    background: rgb(90, 90, 90);
     color: rgb(45, 45, 45);
     padding: 10px;
     font-family: arial;
@@ -15,11 +15,11 @@ header {
 
 /* navigation menu */
 nav {
-    background: rgb(255, 166, 221);
+    background: rgb(53, 53, 53);
     margin-bottom: 20px;
     display: flex;
     padding: 10px;
-    border-radius: 30px 30px 15px 15px;
+    border-radius: 20px 20px 15px 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 nav header {
@@ -42,7 +42,7 @@ nav a {
 
 /* main container area beneath menu */
 main {
-    background: rgb(255, 250, 204);
+    background: rgb(255, 253, 231);
     display: flex;
     padding:inherit;
     border-radius: 15px;
