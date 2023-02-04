@@ -1,5 +1,5 @@
 //This script was built using P5.play library
-
+ 
 var walking;
 var standing;
 var characters = [];
