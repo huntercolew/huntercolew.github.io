@@ -1,35 +1,93 @@
+//This script was built using P5.play library
 
-var spriteSheet;
 var walking;
-var minerObj;
+var standing;
+var characters = [];
+var i;
 
 function preload() {
-  spriteSheet = loadSpriteSheet('spritesheet.png', 80, 80, 144)
-  splunk = loadAnimation(spriteSheet[0],
-    spriteSheet[1],
-    spriteSheet[2],
-    spriteSheet[3],
-    spriteSheet[4],
-    spriteSheet[5],
-    spriteSheet[6],
-    );
+  walkingSpelunk = loadAnimation(loadSpriteSheet('spritesheet.png', 80, 80, 9));
+  standingSpelunk = loadAnimation(loadSpriteSheet('spritesheet.png', 80, 80, 1));
+  walkingClassic = loadAnimation(loadSpriteSheet('classicsheet.png', 126, 139, 9));
+  standingClassic = loadAnimation(loadSpriteSheet('classicsheet.png', 126, 139, 1));
 }
-
 
 function setup() {
-  createCanvas(1200, 900);
-  background(0);
+  createCanvas(windowWidth, windowHeight);
+  //Loop to create a few identical characters
+  for(i = 0; i < 5; i++)
+    characters[i] = new Character("Spelunky" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.1, windowHeight*0.9), walkingSpelunk, standingSpelunk);
+  for(i = characters.length; i < 10; i++){
+    characters[i] = new Character("Classic" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.2, windowHeight*0.9), walkingClassic, standingClassic);
+  }
+    
 }
-
-
 
 function draw() {
   clear();
-  drawSprites();
+  background(230);
+  for(i = 0; i < characters.length; i++){
+    drawSprite(characters[i].sprite);
+  }
 }
 
-function mousePressed() {
-  var s = createSprite(mouseX, mouseY, 30, 30);
-  s.addAnimation('splunk', splunk)
+function keyPressed() {
+  for(i = 0; i < characters.length; i++){
+    characters[i].keyPressed();
+  }
+}
 
+function keyReleased() {
+  for(i = 0; i < characters.length; i++){
+    characters[i].keyReleased();
+  }
+}
+
+
+class Character {
+  constructor(name, dx, dy, walkAnim, standAnim) {
+
+    this.name = name;
+    this.dx = dx;
+    this.dy = dy;
+    this.walkAnim = walkAnim;
+    this.standAnim = standAnim;
+
+    //Algorithm to inversely match speed of sprite with animation delay
+    this.speed = 2 + Math.floor(Math.random() * 4);
+    this.framerate = 7 - this.speed;
+    this.walkAnim.frameDelay = this.framerate;
+
+    //Sprite object within character
+    this.sprite = createSprite(this.dx, this.dy, 30, 30);
+    this.sprite.addAnimation('stand', this.standAnim);
+    this.sprite.addAnimation('walk', this.walkAnim);
+    this.sprite.changeAnimation('stand');
+
+  }
+
+  draw() {
+    drawSprite(this.sprite);
+  }
+
+  keyPressed() {
+    push();
+    if(keyIsDown(RIGHT_ARROW)){
+      this.sprite.mirrorX(1);
+      this.sprite.changeAnimation('walk');
+      this.sprite.setSpeed(this.speed, 0);
+    } else if (keyIsDown(LEFT_ARROW)) {
+      this.sprite.mirrorX(-1);
+      this.sprite.changeAnimation('walk');
+      this.sprite.setSpeed(this.speed, 180);
+    }
+    pop();
+  }
+
+  keyReleased() {
+    push();
+    this.sprite.setSpeed(0, 0);
+    this.sprite.changeAnimation('stand');
+    pop();
+  }
 }
