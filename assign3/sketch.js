@@ -17,9 +17,9 @@ function setup() {
   //Loop to create a few identical characters
   for(i = 0; i < 5; i++)
     characters[i] = new Character("Spelunky" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.1, windowHeight*0.9), walkingSpelunk, standingSpelunk);
-  for(i = characters.length; i < 10; i++){
-    characters[i] = new Character("Classic" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.2, windowHeight*0.9), walkingClassic, standingClassic);
-  }
+  // for(i = characters.length; i < 10; i++){
+  //   characters[i] = new Character("Classic" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.2, windowHeight*0.9), walkingClassic, standingClassic);
+  // }
     
 }
 
@@ -43,6 +43,12 @@ function keyReleased() {
   }
 }
 
+function mousePressed() {
+  for(i = 0; i < characters.length; i++){
+    characters[i].mousePressed();
+  }
+}
+
 
 class Character {
   constructor(name, dx, dy, walkAnim, standAnim) {
@@ -52,6 +58,8 @@ class Character {
     this.dy = dy;
     this.walkAnim = walkAnim;
     this.standAnim = standAnim;
+    this.touchLeft = false;
+    this.touchRight = false;
 
     //Algorithm to inversely match speed of sprite with animation delay
     this.speed = 2 + Math.floor(Math.random() * 4);
@@ -68,6 +76,15 @@ class Character {
 
   draw() {
     drawSprite(this.sprite);
+  }
+
+  mousePressed() {
+    if(Math.abs(this.sprite.position["x"] - mouseX) <= 20 && Math.abs(this.sprite.position["y"] - mouseY) <= 20) {
+          console.log("X:" + mouseX + " Y:" + mouseY);
+          console.log(this.sprite.position);
+          this.sprite.position['x'] += 5;
+    }
+    //console.log(Math.abs(this.sprite.position["y"] - mouseY));
   }
 
   keyPressed() {
