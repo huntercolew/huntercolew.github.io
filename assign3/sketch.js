@@ -17,9 +17,9 @@ function setup() {
   //Loop to create a few identical characters
   for(i = 0; i < 5; i++)
     characters[i] = new Character("Spelunky" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.1, windowHeight*0.9), walkingSpelunk, standingSpelunk);
-  // for(i = characters.length; i < 10; i++){
-  //   characters[i] = new Character("Classic" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.2, windowHeight*0.9), walkingClassic, standingClassic);
-  // }
+  for(i = characters.length; i < 10; i++){
+    characters[i] = new Character("Classic" + i, random(windowWidth*0.1, windowWidth*0.9), random(windowHeight*0.2, windowHeight*0.9), walkingClassic, standingClassic);
+  }
     
 }
 
