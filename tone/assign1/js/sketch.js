@@ -12,9 +12,12 @@ let button1, button2, button3;
 let slider;
 let dist;
 let sound;
+let synth;
 
 function setup() {
   createCanvas(400, 400);
+
+  // synth = new Tone.Synth().toDestination();
 
   dist = new Tone.Distortion(0).toDestination();
   pitchS = new Tone.PitchShift().toDestination();
@@ -63,7 +66,11 @@ function setup() {
   button4.position(40, 200);
   button4.mousePressed(() => playSound("leg"));
 
-  sounds.toDestination();
+  // button5 = createButton("Synth Note");
+  // button5.position(40, 250);
+  // button5.mousePressed(() => synth.triggerAttackRelease("C4", "8n"));
+
+  //sounds.toDestination();
 }
 
 function draw() {
@@ -79,10 +86,15 @@ function draw() {
   text("Sound Sampler", 40, 40);
   text("Distortion Level: " + dist.distortion, 200, 40); 
   text("Pitch Shift Level: " + pitchS.pitch, 200, 140); 
-  text("Delay Level: " + Math.floor(del.delayTime.value*100) + "%", 200, 240);
+  text("Feedback Delay Level: " + Math.floor(del.delayTime.value*100) + "%", 200, 240);
   text("Distortion Wet: " + Math.floor(dist.wet.value*100) + "%", 200, 90); 
   text("Pitch Shift Wet: " + Math.floor(pitchS.wet.value*100) + "%", 200, 190); 
-  text("Delay Wet: " + Math.floor(del.wet.value*100) + "%", 200, 290);
+  text("Feedback Delay Wet: " + Math.floor(del.wet.value*100) + "%", 200, 290);
+
+  text("Instructions: ", 40, 330);
+  text("- Use sliders to set effect level and wet level", 40, 350);
+  text("- Click each button to hear sound using effect", 40, 370);
+
 
 }
 
