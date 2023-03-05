@@ -13,7 +13,7 @@ let game = {
   score: 0,
   maxScore: 0,
   totalSprites: 10,
-  remaining: 10000000,
+  remaining: 10,
   state: "start",
   reset: function () {
     // function to reset score, killed bugs, and game properties such as speed and score.
@@ -30,7 +30,7 @@ let game = {
   increaseSpeed: function () {
     // function to increment speed of bugs as they are squished
     for(i = 0; i < characters.length; i++){
-      characters[i].speed += 1
+      //characters[i].speed += 1
     }
   }
 }
@@ -92,8 +92,9 @@ function draw() {
       }
       fill(0);
       text(game.score, 20, 50);
-      text(ceil(game.time - game.elapsed), 20, 90);
-      game.elapsed += deltaTime / 1000;
+      //text(ceil(game.time - game.elapsed), 20, 90);
+      //game.elapsed += deltaTime / 1000;
+      
       break;
 
     // Game over. Black screen, red and white text. Resets game properties at this time and saves high score. Needs key press to advance game state.
@@ -189,7 +190,7 @@ class Character {
           this.sprite.changeAnimation("stand");
           this.sprite.setSpeed(0, 0);
           game.score +=1
-          game.increaseSpeed();
+          //game.increaseSpeed();
           game.remaining -= 1;
     }
 
