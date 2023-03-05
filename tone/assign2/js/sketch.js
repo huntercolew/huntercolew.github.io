@@ -9,7 +9,7 @@ synth.connect(dist);
 
 let notes = {
 
-  'a': 'C4',
+  'a': 'C#4',
   's': 'D4',
   'd': 'E4',
   'f': 'F4',
@@ -47,7 +47,6 @@ function draw() {
 }
 
 function keyPressed() {
-  console.log(slider.value() + " " + dist.distortion);
   let whatNote = notes[key]
   synth.harmonicity.value = 0.3
   synth.triggerAttackRelease(whatNote, "2n");

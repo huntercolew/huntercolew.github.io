@@ -13,7 +13,7 @@ let game = {
   score: 0,
   maxScore: 0,
   totalSprites: 10,
-  remaining: 10,
+  remaining: 10000000,
   state: "start",
   reset: function () {
     // function to reset score, killed bugs, and game properties such as speed and score.
