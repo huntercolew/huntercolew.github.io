@@ -39,7 +39,7 @@ function draw() {
 
   image(frog, 200 - frog.width/4, 225 - frog.height/4, frog.width/2, frog.height/2);
   
-  if(counter == 0){
+  if(counter == 0 && initTone){
     push();
     fill(color(220));
     noStroke();
