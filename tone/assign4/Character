@@ -1,0 +1,72 @@
+class Character {
+  constructor(dx, dy, h, w, walkAnim, standAnim, vertical) {
+
+    this.dx = dx;
+    this.dy = dy;
+    this.h = h;
+    this.w = w;
+    this.walkAnim = walkAnim;
+    this.standAnim = standAnim;
+    this.touchLeft = false;
+    this.touchRight = false;
+
+
+    this.speed = 2 + Math.floor(Math.random() * 4);
+    this.framerate = 9 - this.speed;
+    this.walkAnim.frameDelay = this.framerate;
+
+    //Sprite object within character
+    this.sprite = createSprite(this.dx, this.dy, 30, 30);
+    this.sprite.addAnimation('stand', this.standAnim);
+    this.sprite.addAnimation('walk', this.walkAnim);
+    this.sprite.changeAnimation('walk');
+
+    //Game state purpose
+    this.vertical = vertical;
+    this.killed = false;
+
+  }
+
+  draw() {
+
+    this.sprite.rotation = this.vertical ? 0 : 90;
+    this.sprite.setSpeed(this.killed ? 0 : this.speed, this.vertical ? -90 : 0);
+
+    // Chain of if statements to check for out of bounds behavior, and reset with slight jiggle
+    if(this.sprite.position["x"] > myWidth + this.w/2){
+      this.sprite.position["x"] = -this.w/2;
+      this.sprite.position["y"] += Math.random() * 20
+    }
+    if(this.sprite.position["x"] < -this.w/2){
+      this.sprite.position["x"] = myWidth + this.w/2;
+      this.sprite.position["y"] += Math.random() * 20
+    }
+    if(this.sprite.position["y"] > myHeight + this.h/2){
+      this.sprite.position["y"] = -this.h/2;
+      this.sprite.position["x"] += Math.random() * 20
+    }
+    if(this.sprite.position["y"] < -this.h/2){
+      this.sprite.position["y"] = myHeight + this.h/2;
+      this.sprite.position["x"] += Math.random() * 20
+    }
+  }
+
+  mousePressed() {
+
+    //Mechanism to check if a bug is being squished
+    //Could implement p5.play sprite.clicked method
+    if(this.killed){
+      return null;
+    }
+    if(Math.abs(this.sprite.position["x"] - mouseX) <= this.w/2 && Math.abs(this.sprite.position["y"] - mouseY) <= this.h/2) {
+          this.killed = true;
+          sounds.player("squish").start();
+          this.sprite.changeAnimation("stand");
+          this.sprite.setSpeed(0, 0);
+          game.score +=1
+          game.increaseSpeed();
+          game.remaining -= 1;
+    }
+
+  }
+}
