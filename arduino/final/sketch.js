@@ -12,7 +12,7 @@ let currentCodeIndex = 0;
 let currentCode;
 let duration = 0;
 
-
+ 
 
 let bg=0;
 var i=0;
