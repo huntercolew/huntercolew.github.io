@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <title>Hunter Williams</title>
+      <link rel="shortcut icon" type="image/x-icon" href="initial.ico" />
+      <style>
+        body {
+            background: rgb(90, 90, 90);
+            color: rgb(45, 45, 45);
+            padding: 10px;
+            font-family: arial;
+        }
+        #all-contents {
+            max-width: 800px;
+            margin: auto;
+        }
+    
+        /* navigation menu */
+        nav {
+            background: rgb(53, 53, 53);
+            margin-bottom: 20px;
+            display: flex;
+            padding: 10px;
+            border-radius: 20px 20px 15px 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        nav h1 {
+            display: flex;
+            align-items: center;
+            color: white;
+            flex: 1;
+            margin: 0;
+        }
+        nav ul {
+            list-style-image: none;
+        }
+        nav li {
+            display: inline-block;
+            padding: 0 10px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+    
+        /* main container area beneath menu */
+        main {
+            background: rgb(255, 253, 231);
+            display: flex;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .sidebar {
+            margin-right: 25px;
+            padding: 10px;
+        }
+        .sidebar img {
+            width: 200px;
+        }
+        .content {
+            flex: 1;
+            padding: 15px;
+        }
+        h2, h3 {
+            margin: 0px;
+        }
+    </style>
+    </head>
+    
+    <body>
+        <div id="all-contents"> 
+            <nav>
+                <h1>CSC 2463</h1>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="csc2463.html">CSC 2463</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="studies.html">Studies</a></li>
+                </ul>
+            </nav>
+            
+            <main>
+                
+                <div class="content" style="margin-left: 20px">
+                    <h2 style="margin-bottom:20px">Final Integration Project Documentation</h2>
+                    
+                    <div style="margin-bottom:20px">
+                        <h2>Basic Idea</h2>
+                        <p>For my final project, I used P5 and Tone.js  to integrate graphics and sound to the safe-cracker game that I developed as part of the last assignment in the physical computing module. The object of the game is to rotate a dial, like you would see on a combination padlock or a safe, until you find each number of the combination, indicated graphically.</p>
+                        <p>The game’s interface starts at the physical computing level. Player interaction is  controlled mainly from Arduino components. The dial’s movement is controlled with a joystick component, which will be translated to the graphical portion of the game. The physical layer will also include digital output for a user to track their performance in the game.</p>
+                        <p>	For the digital component, I have created an interface in P5 that represents the dial on a combination lock. As the user moves the physical joystick, P5 reads this input through Serial Communication and turns the graphical dial accordingly. Once the dial reaches the number needed, the user is signaled. This graphical component also contains the game state, variables, and algorithm. The Arduino component is used primarily as I/O. </p>
+                        <p>	For sound, I used Tone.js to bring the game’s sound environment to life. I added sounds to simulate the clicking sounds of opening a lock, the sound when you are close to the number in the combination, and the sound to indicate if you have beaten the high score. These three major components create an immersive experience that feels like you are really cracking a safe.</p>
+                    </div>
+
+                    <div style="margin-bottom:20px">
+                        <h2 style="margin-bottom:20px">Media</h2>
+
+                        <iframe width="720" height="315"
+                        src="https://youtube.com/embed/wcrwAb0kPwY">
+                        </iframe>
+                        <p style="margin-bottom:20px">
+                            The video above is a demonstration of all the parts working together. The app makes a noise
+                            to guide the user to the code by buzzing in a higher frequency as the user approaches it.
+                        </p>
+
+                        <div>
+                            <img src="docs/start.jpg" alt="Start Screen" style="width:360px;height:360px;">
+                            <img src="docs/playing1.jpg" alt="Playing 1st stage" style="width:360px;height:360px;">
+                        </div>
+                        <div>
+                            <img src="docs/playing2.jpg" alt="Playing second stage" style="width:360px;height:360px;">
+                            <img src="docs/gameover.jpg" alt="Gameover stage" style="width:360px;height:360px;">
+                        </div>
+                        <p style="margin-bottom:20px">
+                            These four images capture the basic stages of the game. The first is the starting screen where 
+                            the user makes sure that their joystick is connected before pressing a button to start. Then, 
+                            the dial is turned right until a code is reached. This process is continued in alternating order
+                            until all three codes are found.
+                        </p>
+                        
+                       
+
+                    </div>
+
+                    <div style="margin-bottom:20px">
+                        <h2 style="margin-bottom:20px">Diagrams</h2>
+                        <div><img src="docs/arduino.jpg" alt="Arduino Diagram" style="width:720px;height:440px;"></div>
+                        <p style="margin-bottom:20px">
+                            This wiring diagram shows how the arduino is wired. The two main components are the LCD board 
+                            for displaying codes and the joystick for controlling the dial. It is possible to wire the LCD 
+                            without the potentiometer, but it is included in this diagram.
+                        </p>
+                        
+                        <div><img src="docs/projectdiagram.jpg" alt="Project diagram in UML format" style="width:720px;height:360px;"></div>
+                        <p style="margin-bottom:20px">
+                            This UML diagram shows the basic structure of the programming elements and how they work together.
+                            The arduino communicates with P5 to send the X value to the sketch, the sketch takes the value and
+                            adds a fraction of it to the angle at which the picture of the dial is rotated. This angle is where
+                            the current code is derived so that the program can compare it to the next randomly generated code.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom:20px">
+                        <h2>Future</h2>
+                        <p>
+                            This game is fairly fun but can become boring after some time. It is not intended to stand alone, but 
+                            would work well as a minigame. In future development, the following features would be quite handy.
+                        </p>
+                        <p> - Better sounds. More realistic and useful sounds would create a better experience for the user</p>
+                        <p> - More inputs. Mouse or keyboard input would help users without arduino kits.</p>
+                        <p> - Better RNG. Random numbers as of now are "truly" random, and sometimes collide with each other</p>
+                        <p> - More intelligent color choice and interface design.</p>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
